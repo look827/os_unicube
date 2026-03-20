@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: feedbacks
+    // Document ID: auto-generated
+    // Fields:
+    //   - name: string (required, 1-100 chars)
+    //   - email: string (required, valid email format)
+    //   - vision: string (required, 1-2000 chars)
+    //   - createdAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidFeedback(data) {
+      return data.keys().hasAll(['name', 'email', 'vision', 'createdAt']) &&
+             data.keys().hasOnly(['name', 'email', 'vision', 'createdAt']) &&
+             data.name is string && data.name.size() >= 1 && data.name.size() <= 100 &&
+             data.email is string && isValidEmail(data.email) &&
+             data.vision is string && data.vision.size() >= 1 && data.vision.size() <= 2000 &&
+             data.createdAt is timestamp;
+    }
+
+    // Feedbacks collection rules
+    match /feedbacks/{feedbackId} {
+      // Allow anyone to create feedback (public submission)
+      allow create: if isValidFeedback(request.resource.data);
+      
+      // Only admins can read/list feedbacks
+      allow read: if isAdmin();
+      
+      // No updates or deletes allowed for now to preserve integrity
+      allow update, delete: if false;
+    }
+
+    // Admin check helper
+    function isAdmin() {
+      return isAuthenticated() && 
+             (request.auth.token.email == "sehajintheusa@gmail.com" && request.auth.token.email_verified == true);
+    }
+  }
+}
