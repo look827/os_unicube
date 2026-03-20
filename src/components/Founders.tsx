@@ -5,15 +5,15 @@ const founders = [
   {
     name: "Sehajdeep Singh Walia",
     initials: "SSW",
-    role: "Co-Founder & Lead Architect",
-    bio: "Visionary designer focused on the intersection of human-computer interaction and minimalist aesthetics.",
+    role: "CEO & Low level Coder",
+    bio: "Expert in low-level systems and performance optimization, dedicated to making every pixel count.",
     image: "https://storage.googleapis.com/static.antigravity.ai/user_files/sehajintheusa@gmail.com/69f78314-e57d-419b-90f7-0847b360a80e/input_file_0.png"
   },
   {
     name: "Jayansh Mahajan",
     initials: "JM",
-    role: "Co-Founder & Systems Engineer",
-    bio: "Expert in low-level systems and performance optimization, dedicated to making every pixel count.",
+    role: "Co-Founder & Lead Architect",
+    bio: "Visionary designer focused on the intersection of human-computer interaction and minimalist aesthetics.",
     image: "https://storage.googleapis.com/static.antigravity.ai/user_files/sehajintheusa@gmail.com/69f78314-e57d-419b-90f7-0847b360a80e/input_file_0.png"
   }
 ];
