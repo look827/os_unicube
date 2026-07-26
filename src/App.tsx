@@ -81,7 +81,7 @@ export default function App() {
           </div>
         </div>
         <div className="mt-20 text-center text-white/20 font-mono text-[10px] uppercase tracking-widest">
-          © 2026 UNICUBE OS. Designed by Sehajdeep & Jayansh.
+          © 2026 UNICUBE OS. Designed by Sehajdeep & Sakethram.
         </div>
       </footer>
     </div>
